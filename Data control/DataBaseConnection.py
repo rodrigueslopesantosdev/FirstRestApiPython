@@ -3,12 +3,13 @@ import pymysql.cursors
 
 class DataBaseConnection (object):
 
-    def __init__(self, hostName, userName, passWord, dbName):
+    def __init__(self, hostName, userName, passWord, dbName, portNumber):
         self.setHostName(hostName)
         self.setUserName(userName)
         self.setPassWord(userName)
         self.setDbName(dbName)
-        self.setConnection(hostName, userName, passWord, dbName)
+        self.setPortNumber(portNumber)
+        self.setConnection(hostName, userName, passWord, dbName, portNumber)
 
 
     def setHostName(self, hostName):
@@ -23,13 +24,16 @@ class DataBaseConnection (object):
     def setDbName (self, dbName):
         self.dbName = dbName
 
+    def setPortNumber(self, portNumber):
+        self.portNumber = portNumber
 
-    def setConnection(self, hostName, userName, passWord, dbName):
-        connection = pymysql.connect(host=hostName,
+    def setConnection(self, hostName, userName, passWord, dbName, portNumber):
+        self.connection = pymysql.connect(host=hostName,
+                                          port=portNumber,
                                      user=userName,
                                      password=passWord,
-                                     db=dbName)
-        # cursorclass = pymysql.cursors.DictCursor)
+                                     db=dbName,
+                                     cursorclass=pymysql.cursors.DictCursor)
 
     def getConnectionCursor(self) :
         return self.connection.cursor()
@@ -45,6 +49,9 @@ class DataBaseConnection (object):
 
     def getDbName(self):
         return self.dbName
+
+    def getPortNumber(self):
+        return self.portNumber
 
     def closeConnection(self):
         self.connection.close()
