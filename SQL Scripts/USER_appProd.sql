@@ -1,9 +1,8 @@
 
-CREATE USER 'pythonTest'@'rdstiagoaws.cteqiyblhicy.us-east-2.rds.amazonaws.com' IDENTIFIED BY 'pythonTest2017';
+CREATE USER 'pythonTest'@'177.97.194.182' IDENTIFIED BY 'pythonTest2017';
 
-grant SELECT, INSERT, UPDATE, DELETE ON Vehicles.CARS TO pythonTest;
+grant SELECT, INSERT, UPDATE, DELETE ON Vehicles.CARS TO 'pythonTest'@'177.97.194.182';
 
-grant SELECT, INSERT, UPDATE, DELETE ON Vehicles.MOTORCYCLE TO pythonTest;
-
+grant SELECT, INSERT, UPDATE, DELETE ON Vehicles.MOTORCYCLE TO 'pythonTest'@'177.97.194.182';
 
 commit;
